@@ -1,5 +1,4 @@
 import React from "react"
-import { GoogleLogin } from 'react-google-login'
 
 const SignUp = () => {
 
@@ -11,13 +10,6 @@ const SignUp = () => {
 
     }
 
-    const googleSuccess = (res) => {
-        console.log(res);
-    }
-
-    const googleFailure = () => {
-        console.log("Google Sign In was Unsuccessful. Try Again Later.")
-    }
 
     return (
         <>
@@ -30,21 +22,6 @@ const SignUp = () => {
                 <button type="submit">Sign Up</button>
             </form>
 
-            <GoogleLogin 
-                clientId="GOOGLE ID"
-                render={(renderProps) => (
-                    <button 
-                        onClick={renderProps.onClick} 
-                        disabled={renderProps.disabled} 
-                    >
-                        Google Sign in
-
-                    </button>
-                )}
-                onSuccess={googleSuccess}
-                onFailure={googleFailure}
-                cookiePolicy="single_host_origin"
-            />
         </>
     )
 }
