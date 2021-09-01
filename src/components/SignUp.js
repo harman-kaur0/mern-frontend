@@ -1,6 +1,8 @@
-import React from "react"
+import React, { useState } from "react"
 
 const SignUp = () => {
+    const [form, setForm] = useState({firstName: "", lastName: "", email: "", password: ""})
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
