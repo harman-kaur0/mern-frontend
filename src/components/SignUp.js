@@ -1,15 +1,22 @@
-import React, { useState } from "react"
+import React, { useState, useHistory } from "react"
+import {signup} from '../actions/auth'
+import { useDispatch } from 'react-redux'
+
+const initialState = {firstName: "", lastName: "", email: "", password: "", confirmPassword: ""};
 
 const SignUp = () => {
-    const [form, setForm] = useState({firstName: "", lastName: "", email: "", password: ""})
+    const [form, setForm] = useState(initialState);
+    const dispatch = useDispatch();
+    const history = useHistory();
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        dispatch(signup(form, history))
     }
 
-    const handleChange = () => {
-
+    const handleChange = (e) => {
+        setForm({[e.target.name]: e.target.value})
     }
 
 

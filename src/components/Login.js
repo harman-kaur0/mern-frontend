@@ -1,10 +1,15 @@
-import React from "react"
+import React, { useState, useHistory } from "react"
 import { GoogleLogin } from 'react-google-login'
 import { useDispatch } from 'react-redux'
+import {signin} from '../actions/auth'
+
+const initialState = {email: '', password: ''}
 
 const Login = () => {
 
     const dispatch = useDispatch();
+    const history = useHistory();
+    const [form, setForm] = useState(initialState);
 
     const googleSuccess = async (res) => {
         const result = res?.profileObj;
@@ -21,11 +26,21 @@ const Login = () => {
         console.log(error);
         console.log("Google Sign In was Unsuccessful. Try Again Later.")
     }
+
+    const handleSubmit = (e) => {
+        e.preventDafault();
+        dispatch(signin(form, history))
+    }
+
+    const handleChange = (e) => {
+        setForm({[e.target.name]: e.target.value})
+    }
+
     return (
         <>
-            <form style={{marginTop: "50px"}}>
-                <input placeholder="username" type="text"/>
-                <input placeholder="username" type="text"/>
+            <form style={{marginTop: "50px"}} onSubmit={handleSubmit}>
+                <input placeholder="email" type="text" name="email" onChange={handleChange}/>
+                <input placeholder="password" type="password" name="password" onChange={handleChange}/>
                 <button type="submit">Sign In</button>
             </form>
 
