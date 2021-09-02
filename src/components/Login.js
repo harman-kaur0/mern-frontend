@@ -1,4 +1,5 @@
-import React, { useState, useHistory } from "react"
+import React, { useState } from "react"
+import { useHistory } from 'react-router-dom'
 import { GoogleLogin } from 'react-google-login'
 import { useDispatch } from 'react-redux'
 import {signin} from '../actions/auth'
@@ -6,9 +7,8 @@ import {signin} from '../actions/auth'
 const initialState = {email: '', password: ''}
 
 const Login = () => {
-
-    const dispatch = useDispatch();
     const history = useHistory();
+    const dispatch = useDispatch();
     const [form, setForm] = useState(initialState);
 
     const googleSuccess = async (res) => {
@@ -33,7 +33,7 @@ const Login = () => {
     }
 
     const handleChange = (e) => {
-        setForm({[e.target.name]: e.target.value})
+        setForm({...form, [e.target.name]: e.target.value})
     }
 
     return (
